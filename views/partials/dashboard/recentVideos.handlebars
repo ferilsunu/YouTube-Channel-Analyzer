@@ -1,0 +1,30 @@
+<div class="recentVideosContainer">
+
+                        <div class="recentVideosTitleContainer">
+                            <p class="sub-bold">Recent Videos</p>
+                        </div>
+
+                        <div class="fourVideoContainer">
+
+                            {{#each videos }}
+
+                            <div class="singleVideoContainer" data-toggle="modal" data-target="#videoModal" data-videoId="{{id}}">
+
+                    
+                                <div class="singleImg">
+                                    <i class="far fa-play-circle"></i>
+                                    <img src="{{thumbnails}}">
+                                </div>
+                             
+
+                            </div>
+
+                               {{/each}}
+
+
+                        </div>
+
+
+                    </div>
+
+            

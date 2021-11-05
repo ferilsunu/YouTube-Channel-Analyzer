@@ -1,0 +1,56 @@
+<div class="col-12 col-lg-9">
+    <div class="contentContainer scroll-active">
+
+        <div class="homeIconContainer d-lg-none">
+            <a href="/"><i class="fas fa-home"></i></a>
+        </div>
+
+        {{>dashboard/profileCard}}
+
+
+        <div class="row infoContainer">
+            <div class="col-12 col-lg-6">
+                <div class="aboutContainer info-2">
+
+                    <p class="infoTitle sub-bold">About</p>
+                    <p>{{data.snippet.description}}
+
+                    </p>
+
+                    <p class="infoTitle sub-bold">Trailer</p>
+
+                    <iframe width="100%" height="100%" class="channelTrailer"
+                        src="https://www.youtube.com/embed/{{channelStats.brandingSettings.channel.unsubscribedTrailer}}" frameborder="0">
+
+                    </iframe>
+
+
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="statContainer info-2" id="statContainer">
+
+                    <p class="infoTitle sub-bold">Statistics</p>
+                    <ul>
+                        <li><i class="fab fa-youtube"></i>{{channelStats.statistics.subscriberCount}} Subscribers</li>
+                        <li><i class="far fa-eye"></i>{{channelStats.statistics.viewCount}} Views</li>
+                        <li><i class="fas fa-dollar-sign moneyIcon"></i>{{convertedEarning}} Estimated</li>
+                        <li><i class="fas fa-video"></i>{{channelStats.statistics.videoCount}} Videos</li>
+                        <li><i class="fas fa-globe-americas"></i>{{channelStats.brandingSettings.channel.country}}</li>
+                        <li><i class="fas fa-child"></i>Made For Kids: {{isForKids}}</li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        {{>dashboard/recentVideos}}
+
+    </div>
+</div>
