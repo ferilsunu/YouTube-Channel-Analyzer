@@ -1,0 +1,426 @@
+:root {
+    --primaryColor: #FF0000;
+    --secondaryColor: #000000;
+    --boxShadowDefault: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "poppins";
+    box-sizing: border-box;
+
+}
+
+.sub-bold {
+    font-weight: 500;
+}
+
+body {
+    background-color: #F6F6F6;
+}
+
+p {
+    margin: 0;
+}
+
+button {
+    background-color: var(--primaryColor);
+    color: #fff;
+    padding: 8px 40px;
+    border: none;
+
+}
+
+
+.buttonContainer button:hover {
+    background-color: #ff0000b6;
+    cursor: pointer;
+
+}
+
+
+.buttonContainer a {
+    padding: 5px 15px;
+    background-color: var(--primaryColor);
+    color: #fff;
+    padding: 8px 40px;
+    border: none;
+}
+
+.buttonContainer a:hover{
+    text-decoration: none;
+}
+
+
+
+/*Logo Start*/
+.logoContainer {
+    width: 100%;
+    padding: 0 20px 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoContainer img {
+    width: 100%;
+}
+
+/*Logo end*/
+
+
+
+
+/*Card Container Start*/
+
+.contentContainer,
+.navContainer {
+    background-color: #fff;
+    border-radius: 11px;
+    min-height: 80vh;
+    max-height: 80vh;
+    margin: 10vh -15px 0 0;
+    box-shadow: var(--boxShadowDefault);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+
+
+.navContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*Card Container End*/
+
+
+.contentContainer-header {
+    padding: 35px;
+    border-bottom: 1px solid rgba(0, 0, 1, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+.buttonContainer {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+/* Channel Logo Start */
+.img-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--primaryColor);
+
+
+
+}
+
+.img-circle img {
+    width: 100%;
+    height: 100%;
+
+}
+
+/* Channel Logo End */
+
+
+/* PhotoCard Start */
+.photoCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.text-group {
+    padding-left: 15px;
+}
+
+/* PhotoCard End */
+
+
+
+.joinDate {
+    font-size: 13px;
+}
+
+
+#statContainer {
+    border-left: 1px solid rgba(0, 0, 1, 0.1);
+    padding-left: 15px;
+}
+
+.infoContainer {
+    padding: 30px 0 0 40px;
+}
+
+.aboutContainer {
+    padding-left: 15px;
+    min-height: 366px;
+    max-height: 336px;
+}
+
+.statContainer ul {
+    list-style-type: none;
+}
+
+.statContainer ul li {
+    padding: 10px;
+    text-align: left;
+}
+
+
+.statContainer ul li i {
+    margin-right: 15px;
+    text-align: center;
+}
+
+.infoTitle {
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
+.moneyIcon {
+    margin-left: 4px;
+}
+
+
+/* ContentBox Scroll Bar Start*/
+.scroll-active::-webkit-scrollbar-track {
+
+
+    background-color: #ffffff;
+}
+
+.scroll-active::-webkit-scrollbar {
+    width: 10px;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+.scroll-active::-webkit-scrollbar-thumb {
+
+    background-color: #9b97979d;
+
+}
+
+/* ContentBox Scroll Bar End*/
+
+/*Search Start*/
+.iButton {
+    padding: 8px 10px;
+    display: inline;
+    border-radius: 0;
+    height: 100%;
+    box-shadow: var(--boxShadowDefault);
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 0 20px 0 20px;
+}
+
+.searchInput {
+    background-color: rgb(51 51 51 / 2%);
+    border: none;
+    outline: none;
+    height: 40px;
+    box-shadow: var(--boxShadowDefault);
+    padding-left: 15px;
+    width: 100%;
+
+}
+
+.searchInput::placeholder {
+    color: rgba(0, 0, 0, 0.294);
+}
+
+/*Search End*/
+
+
+/*Navigation Links Start*/
+
+.linkContainer {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 20px 0 20px;
+}
+
+.linkContainer ul {
+    list-style-type: none;
+    padding-left: 1em;
+}
+
+.linkContainer ul li {
+    padding-top: 40px;
+}
+
+.linkContainer ul li a {
+    text-decoration: none;
+    color: var(--secondaryColor);
+    font-size: 18px;
+
+
+
+}
+
+
+
+/*Navigation Links End*/
+
+
+/* Recent Videos Style Start*/
+.fourVideoContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.singleVideoContainer {
+    width: 100%;
+}
+
+.singleVideoContainer img {
+    width: 100%;
+
+}
+
+.singleImg {
+    position: relative;
+}
+
+.singleImg i {
+    position: absolute;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+}
+
+
+
+
+.recentVideosContainer {
+    padding: 10px 50px 10px 50px;
+}
+
+.recentVideosTitleContainer {
+    margin-bottom: 10px;
+}
+
+
+.singleVideoContainer:hover {
+    cursor: pointer;
+}
+
+
+
+
+/* Recent Videos Style End*/
+
+
+
+@media screen and (max-width: 1197px) {
+    .searchInput {
+        padding: 0;
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    .navLinkText {
+        display: none;
+    }
+
+    #statContainer {
+        border-left: 0;
+    }
+}
+
+@media screen and (max-width: 571px) {
+    #statContainer {
+        border-left: 0;
+    }
+
+    .photoCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    .statContainer ul li {
+        padding: 10px 0px;
+    }
+
+
+
+
+    .contentContainer-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .text-group {
+        text-align: center;
+        padding: 0;
+    }
+
+    .buttonContainer button {
+        padding: 5px 15px;
+        font-size: 11px;
+    }
+
+
+    .contentContainer,
+    .navContainer {
+        margin: 10vh 0 0 0;
+    }
+
+}
+
+@media screen and (max-width:565px) {
+    .fourVideoContainer {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .aboutContainer {
+        min-height: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Home Icon Mobile Menu */
+.homeIconContainer a i {
+    color: var(--secondaryColor);
+    padding: 30px;
+    font-size: 22px;
+
+}
+
+/* Home Icon Mobile Menu End */
