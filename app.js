@@ -16,6 +16,6 @@ const dashboardRoute = require('./routers/dashboard')
 app.use('/',indexRoute)
 app.use('/dashboard',dashboardRoute)
 
-app.listen(process.env.port,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("Program running on  port " + process.env.port) 
 })
