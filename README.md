@@ -24,7 +24,7 @@ API_KEY=yourApiKey
 
 # Links
 - [API Documentation](https://developers.google.com/youtube/v3/docs/search)
-- [Live Preview](http://youtube-channel-analyzer.ferilsunu.me/)
+- [Live Preview](https://youtube-channel-analyzer.azurewebsites.net/)
 
 # Images
 
