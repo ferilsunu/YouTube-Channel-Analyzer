@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.disable('x-powered-by')
 const path = require('path')
 const public_path = path.join(__dirname,'/public')
 const hbs = require('express-handlebars')
@@ -16,6 +17,6 @@ const dashboardRoute = require('./routers/dashboard')
 app.use('/',indexRoute)
 app.use('/dashboard',dashboardRoute)
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT,'127.0.0.1',()=>{
     console.log("Program running on  port " + process.env.port) 
 })
