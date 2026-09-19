@@ -1,5 +1,5 @@
 /**
- * YouTube Channel Analyzer & Intelligence Dashboard Controller v3.0
+ * YouTube Channel Analyzer & Intelligence Dashboard Controller v3.1
  * Author: Feril Sunu
  */
 
@@ -129,12 +129,12 @@
       const rev = btnCopyAudit.getAttribute('data-rev');
 
       const textReport = [
-        `📊 YouTube Channel Audit: ${title} (${handle})`,
-        `👥 Subscribers: ${subs}`,
-        `👁️ Total Lifetime Views: ${views}`,
-        `⚡ Engagement Rate: ${eng}`,
-        `💰 Est. Monthly Revenue: ${rev}`,
-        `🔗 Analyzed with YouTube Channel Analyzer: https://analyzer.ferilsunu.com`
+        `[YouTube Channel Audit] ${title} (${handle})`,
+        `• Subscribers: ${subs}`,
+        `• Total Lifetime Views: ${views}`,
+        `• Engagement Rate: ${eng}`,
+        `• Est. Monthly Revenue: ${rev}`,
+        `• Source: https://analyzer.ferilsunu.com`
       ].join('\n');
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -146,5 +146,12 @@
       }
     });
   }
+
+  // Initialize Lucide icons
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  });
 
 })();
