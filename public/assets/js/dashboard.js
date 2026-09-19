@@ -148,10 +148,16 @@
   }
 
   // Initialize Lucide icons
-  document.addEventListener('DOMContentLoaded', () => {
+  function initIcons() {
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIcons);
+  } else {
+    initIcons();
+  }
 
 })();
