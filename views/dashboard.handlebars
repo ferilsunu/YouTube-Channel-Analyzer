@@ -1,56 +1,366 @@
-<div class="col-12 col-lg-9">
-    <div class="contentContainer scroll-active">
+<div class="dashboard-inner-container">
 
-        <div class="homeIconContainer d-lg-none">
-            <a href="/"><i class="fas fa-home"></i></a>
+  <!-- Quick Filter Pills -->
+  <section class="preset-channels-row">
+    <span class="preset-label">TRENDING CREATORS:</span>
+    <div class="preset-scroll-track">
+      <a href="/analyze?channel=mkbhd" class="preset-pill {{#if (eq data.channel.handle '@mkbhd')}}active{{/if}}">Marques Brownlee</a>
+      <a href="/analyze?channel=veritasium" class="preset-pill {{#if (eq data.channel.handle '@veritasium')}}active{{/if}}">Veritasium</a>
+      <a href="/analyze?channel=MrBeast" class="preset-pill {{#if (eq data.channel.handle '@mrbeast')}}active{{/if}}">MrBeast</a>
+      <a href="/analyze?channel=fireship" class="preset-pill {{#if (eq data.channel.handle '@fireship')}}active{{/if}}">Fireship</a>
+      <a href="/analyze?channel=kurzgesagt" class="preset-pill {{#if (eq data.channel.handle '@kurzgesagt')}}active{{/if}}">Kurzgesagt</a>
+      <a href="/analyze?channel=t3dotgg" class="preset-pill {{#if (eq data.channel.handle '@t3dotgg')}}active{{/if}}">Theo - t3.gg</a>
+      <a href="/analyze?channel=lexfridman" class="preset-pill {{#if (eq data.channel.handle '@lexfridman')}}active{{/if}}">Lex Fridman</a>
+    </div>
+  </section>
+
+  {{#if error}}
+  <div class="error-banner">
+    <div class="error-icon">⚠️</div>
+    <div class="error-text">
+      <h4>Channel Lookup Error</h4>
+      <p>{{error}}</p>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if data}}
+  <!-- 1. Hero Showcase Card -->
+  <section class="glass-card hero-channel-card">
+    {{#if data.channel.banner}}
+    <div class="channel-banner" style="background-image: url('{{data.channel.banner}}');">
+      <div class="banner-overlay"></div>
+    </div>
+    {{else}}
+    <div class="channel-banner default-banner">
+      <div class="banner-overlay"></div>
+    </div>
+    {{/if}}
+
+    <div class="hero-content-wrap">
+      <div class="channel-avatar-box">
+        <img src="{{data.channel.avatar}}" alt="{{data.channel.title}}" class="channel-avatar-img">
+      </div>
+
+      <div class="channel-profile-details">
+        <div class="title-and-badges">
+          <h1 class="channel-title">{{data.channel.title}}</h1>
+          <span class="verified-badge" title="Verified Creator">✓</span>
+          <span class="country-tag">{{data.channel.country}}</span>
         </div>
 
-        {{>dashboard/profileCard}}
+        <div class="channel-meta-subline">
+          <span class="channel-handle-txt">{{data.channel.handle}}</span>
+          <span class="dot-sep">•</span>
+          <span>Joined {{data.channel.joinDate}}</span>
+          <span class="dot-sep">•</span>
+          <span class="kids-tag">Made for Kids: {{data.channel.isForKids}}</span>
+        </div>
+      </div>
 
+      <div class="hero-action-buttons">
+        <button type="button" id="btn-copy-audit" class="btn-primary" data-title="{{data.channel.title}}" data-handle="{{data.channel.handle}}" data-subs="{{data.statistics.subscribers}}" data-views="{{data.statistics.views}}" data-eng="{{data.analytics.engagementRate}}" data-rev="{{data.analytics.earnings.monthlyRange}}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span>Copy Channel Audit</span>
+        </button>
+        <a href="{{data.channel.channelUrl}}" target="_blank" rel="noopener" class="btn-secondary">
+          <span>Visit on YouTube</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <div class="row infoContainer">
-            <div class="col-12 col-lg-6">
-                <div class="aboutContainer info-2">
+  <!-- 2. Primary KPI Metrics Grid -->
+  <section class="kpi-metrics-grid">
+    
+    <!-- Card 1: Subscribers -->
+    <div class="glass-card kpi-card">
+      <div class="kpi-header">
+        <span class="kpi-label">SUBSCRIBERS</span>
+        <div class="kpi-icon-pill">👥</div>
+      </div>
+      <div class="kpi-value-row">
+        <span class="kpi-number">{{data.statistics.subscribers}}</span>
+      </div>
+      <span class="kpi-subtext">Total Community Reach</span>
+    </div>
 
-                    <p class="infoTitle sub-bold">About</p>
-                    <p>{{data.snippet.description}}
+    <!-- Card 2: Total Views -->
+    <div class="glass-card kpi-card">
+      <div class="kpi-header">
+        <span class="kpi-label">TOTAL VIEWS</span>
+        <div class="kpi-icon-pill">👁️</div>
+      </div>
+      <div class="kpi-value-row">
+        <span class="kpi-number">{{data.statistics.views}}</span>
+      </div>
+      <span class="kpi-subtext">Cumulative Lifetime Impressions</span>
+    </div>
 
-                    </p>
+    <!-- Card 3: Avg Views Per Upload -->
+    <div class="glass-card kpi-card">
+      <div class="kpi-header">
+        <span class="kpi-label">AVG VIEWS / UPLOAD</span>
+        <div class="kpi-icon-pill">📊</div>
+      </div>
+      <div class="kpi-value-row">
+        <span class="kpi-number">{{data.statistics.avgViewsPerVideo}}</span>
+      </div>
+      <span class="kpi-subtext">Velocity: {{data.statistics.uploadsPerMonth}} uploads / month</span>
+    </div>
 
-                    <p class="infoTitle sub-bold">Trailer</p>
+    <!-- Card 4: Estimated Monthly Revenue -->
+    <div class="glass-card kpi-card highlight-kpi">
+      <div class="kpi-header">
+        <span class="kpi-label">EST. MONTHLY REVENUE</span>
+        <div class="kpi-icon-pill green">💰</div>
+      </div>
+      <div class="kpi-value-row">
+        <span class="kpi-number">{{data.analytics.earnings.monthlyRange}}</span>
+      </div>
+      <span class="kpi-subtext">Median: {{data.analytics.earnings.monthlyMid}} / mo</span>
+    </div>
 
-                    <iframe width="100%" height="100%" class="channelTrailer"
-                        src="https://www.youtube.com/embed/{{channelStats.brandingSettings.channel.unsubscribedTrailer}}" frameborder="0">
+  </section>
 
-                    </iframe>
+  <!-- 3. In-Depth Analytics Section (2 Columns) -->
+  <section class="analytics-two-col-grid">
 
+    <!-- Column 1: Performance, Engagement & Monetization Calculator -->
+    <div class="col-stack">
 
-
-                </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="statContainer info-2" id="statContainer">
-
-                    <p class="infoTitle sub-bold">Statistics</p>
-                    <ul>
-                        <li><i class="fab fa-youtube"></i>{{channelStats.statistics.subscriberCount}} Subscribers</li>
-                        <li><i class="far fa-eye"></i>{{channelStats.statistics.viewCount}} Views</li>
-                        <li><i class="fas fa-dollar-sign moneyIcon"></i>{{convertedEarning}} Estimated</li>
-                        <li><i class="fas fa-video"></i>{{channelStats.statistics.videoCount}} Videos</li>
-                        <li><i class="fas fa-globe-americas"></i>{{channelStats.brandingSettings.channel.country}}</li>
-                        <li><i class="fas fa-child"></i>Made For Kids: {{isForKids}}</li>
-
-                    </ul>
-
-                </div>
-            </div>
-
-
-
+      <!-- Channel Health & Engagement Score -->
+      <div class="glass-card section-card">
+        <div class="card-header-bar">
+          <div class="header-title-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <h3>CHANNEL HEALTH & AUDIT</h3>
+          </div>
+          <span class="grade-badge grade-{{data.analytics.grade}}">GRADE {{data.analytics.grade}}</span>
         </div>
 
+        <div class="audit-body-wrap">
+          <div class="score-row">
+            <div class="score-circle">
+              <span class="score-val">{{data.analytics.healthScore}}</span>
+              <span class="score-max">/100</span>
+            </div>
+            <div class="score-breakdown-details">
+              <div class="metric-line">
+                <span class="lbl">Audience Engagement Rate</span>
+                <strong class="val">{{data.analytics.engagementRate}}</strong>
+              </div>
+              <div class="metric-line">
+                <span class="lbl">Recent Uploads Avg Views</span>
+                <strong class="val">{{data.statistics.recentAvgViews}}</strong>
+              </div>
+              <div class="metric-line">
+                <span class="lbl">Total Catalog Size</span>
+                <strong class="val">{{data.statistics.videoCount}} Videos</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        {{>dashboard/recentVideos}}
+      <!-- Interactive Monetization & CPM Simulator -->
+      <div class="glass-card section-card">
+        <div class="card-header-bar">
+          <div class="header-title-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <h3>MONETIZATION & CPM SIMULATOR</h3>
+          </div>
+          <span class="mini-pill-tag">SIMULATOR</span>
+        </div>
+
+        <div class="cpm-calculator-body">
+          <div class="cpm-slider-header">
+            <span>Effective CPM Rate: <strong id="cpm-display-val">$3.50</strong></span>
+          </div>
+          <input type="range" id="cpm-slider" min="1.0" max="12.0" step="0.5" value="3.5" class="cpm-range-input" data-views="{{data.statistics.recentAvgViews}}" data-velocity="{{data.statistics.uploadsPerMonth}}">
+          
+          <div class="earnings-result-mosaic">
+            <div class="earn-box">
+              <span class="earn-lbl">Simulated Monthly Earnings</span>
+              <strong class="earn-val" id="sim-monthly-val">{{data.analytics.earnings.monthlyMid}}</strong>
+            </div>
+            <div class="earn-box">
+              <span class="earn-lbl">Simulated Annual Potential</span>
+              <strong class="earn-val" id="sim-yearly-val">{{data.analytics.earnings.yearlyRange}}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Format Breakdown (Shorts vs Long-form) -->
+      <div class="glass-card section-card">
+        <div class="card-header-bar">
+          <div class="header-title-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+            <h3>CONTENT FORMAT DISTRIBUTION</h3>
+          </div>
+          <span class="mini-pill-tag">RECENT UPLOADS</span>
+        </div>
+
+        <div class="format-distribution-body">
+          <div class="format-ratio-bar">
+            <div class="bar-segment longform-seg" style="width: {{data.analytics.longformPercent}}%;" title="Long-form: {{data.analytics.longformPercent}}%"></div>
+            <div class="bar-segment shorts-seg" style="width: {{data.analytics.shortsPercent}}%;" title="Shorts: {{data.analytics.shortsPercent}}%"></div>
+          </div>
+          <div class="format-labels-row">
+            <div class="format-legend-item">
+              <span class="legend-dot longform-dot"></span>
+              <span>Long-Form: <strong>{{data.analytics.longformCount}} videos ({{data.analytics.longformPercent}}%)</strong></span>
+            </div>
+            <div class="format-legend-item">
+              <span class="legend-dot shorts-dot"></span>
+              <span>Shorts: <strong>{{data.analytics.shortsCount}} videos ({{data.analytics.shortsPercent}}%)</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
+
+    <!-- Column 2: SEO Tags, Channel Topics & Official Trailer -->
+    <div class="col-stack">
+
+      <!-- SEO Keywords & Top Tags -->
+      <div class="glass-card section-card">
+        <div class="card-header-bar">
+          <div class="header-title-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <h3>CONTENT SEO & KEYWORD INTELLIGENCE</h3>
+          </div>
+          <span class="mini-pill-tag">TOP TAGS</span>
+        </div>
+
+        <div class="seo-tags-body">
+          {{#if data.analytics.topTags.length}}
+          <div class="tag-cloud-wrap">
+            {{#each data.analytics.topTags}}
+            <span class="seo-tag-pill">
+              <span class="tag-name">#{{tag}}</span>
+              <span class="tag-count">{{count}}x</span>
+            </span>
+            {{/each}}
+          </div>
+          {{else}}
+          <p class="empty-hint-text">No explicit tags detected in recent video metadata.</p>
+          {{/if}}
+        </div>
+      </div>
+
+      <!-- Niche Categories -->
+      {{#if data.analytics.topics.length}}
+      <div class="glass-card section-card">
+        <div class="card-header-bar">
+          <div class="header-title-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <h3>CLASSIFIED TOPIC CATEGORIES</h3>
+          </div>
+          <span class="mini-pill-tag">NICHE</span>
+        </div>
+
+        <div class="niche-topics-body">
+          <div class="niche-pills-wrap">
+            {{#each data.analytics.topics}}
+            <span class="niche-pill">📁 {{this}}</span>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
+      <!-- Channel Description & Trailer -->
+      <div class="glass-card section-card">
+        <div class="card-header-bar">
+          <div class="header-title-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <h3>ABOUT & CHANNEL TRAILER</h3>
+          </div>
+        </div>
+
+        <div class="channel-about-body">
+          <p class="channel-bio-text">{{data.channel.description}}</p>
+
+          {{#if data.channel.trailerVideoId}}
+          <div class="trailer-wrapper">
+            <span class="trailer-label">FEATURED TRAILER</span>
+            <div class="trailer-iframe-box">
+              <iframe src="https://www.youtube.com/embed/{{data.channel.trailerVideoId}}" title="YouTube Channel Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- 4. Recent Uploads Interactive Matrix -->
+  <section class="glass-card recent-uploads-section">
+    <div class="card-header-bar">
+      <div class="header-title-box">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+        <h3>LATEST UPLOADS & ENGAGEMENT TELEMETRY</h3>
+      </div>
+      <span class="mini-pill-tag">CLICK TO PLAY</span>
+    </div>
+
+    {{#if data.recentVideos.length}}
+    <div class="video-cards-grid">
+      {{#each data.recentVideos}}
+      <div class="video-item-card" data-videoid="{{id}}" data-title="{{title}}">
+        <div class="video-thumb-wrap">
+          <img src="{{thumbnail}}" alt="{{title}}" class="video-thumb-img" loading="lazy">
+          <span class="video-duration-pill">{{duration}}</span>
+          <div class="play-overlay-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </div>
+        </div>
+        
+        <div class="video-info-content">
+          <h4 class="video-item-title" title="{{title}}">{{title}}</h4>
+          
+          <div class="video-stat-row">
+            <span class="v-stat-item">👁️ <strong>{{viewCount}}</strong></span>
+            <span class="v-stat-item">👍 <strong>{{likeCount}}</strong></span>
+            <span class="v-stat-item">💬 <strong>{{commentCount}}</strong></span>
+          </div>
+
+          <div class="video-date-subtext">
+            <span>{{relativeTime}}</span>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <p class="empty-hint-text">No recent uploads found for this channel.</p>
+    {{/if}}
+  </section>
+
+  {{/if}}
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div class="footer-left">
+      <p>© 2026 <a href="https://ferilsunu.com" target="_blank" rel="noopener">Feril Sunu</a> • Built with YouTube Data API v3</p>
+    </div>
+    <div class="footer-right">
+      <a href="https://github.com/ferilsunu/YouTube-Channel-Analyzer" target="_blank" rel="noopener">GitHub</a>
+      <span class="sep">•</span>
+      <a href="https://developers.google.com/youtube/v3" target="_blank" rel="noopener">YouTube API</a>
+      <span class="sep">•</span>
+      <a href="https://ferilsunu.com" target="_blank" rel="noopener">Portfolio</a>
+      <span class="sep">•</span>
+      <span class="version-tag">v3.0 Intelligence</span>
+    </div>
+  </footer>
+
 </div>

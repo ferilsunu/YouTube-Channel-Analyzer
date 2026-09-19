@@ -1,22 +1,35 @@
-const express = require('express')
-const app = express()
-app.disable('x-powered-by')
-const path = require('path')
-const public_path = path.join(__dirname,'/public')
-const hbs = require('express-handlebars')
-require('dotenv').config()
+const express = require('express');
+const path = require('path');
+const hbs = require('express-handlebars');
+require('dotenv').config();
 
-app.use(express.static(public_path))
-app.engine('handlebars',hbs({defaultLayout: 'dashboardLayout'}))
-app.set('view engine', 'handlebars')
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+const app = express();
+app.disable('x-powered-by');
 
-const indexRoute = require('./routers/index')
-const dashboardRoute = require('./routers/dashboard')
-app.use('/',indexRoute)
-app.use('/dashboard',dashboardRoute)
+const publicPath = path.join(__dirname, 'public');
 
-app.listen(process.env.PORT,'127.0.0.1',()=>{
-    console.log("Program running on  port " + process.env.port) 
-})
+// Configure Handlebars
+app.engine('handlebars', hbs({
+  defaultLayout: 'dashboardLayout',
+  helpers: {
+    json: (context) => JSON.stringify(context),
+    eq: (a, b) => a === b,
+    gt: (a, b) => a > b
+  }
+}));
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static(publicPath));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Routes
+const indexRoute = require('./routers/index');
+app.use('/', indexRoute);
+app.use('/dashboard', indexRoute);
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '127.0.0.1', () => {
+  console.log(`YouTube Channel Analyzer running on port ${PORT}`);
+});
