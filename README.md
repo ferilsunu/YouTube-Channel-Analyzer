@@ -6,7 +6,7 @@ A modern, fullstack YouTube channel intelligence and analytics platform built wi
 
 ## Live Demo & Links
 
-- Live Preview: [youtube-channel-analyzer.azurewebsites.net](https://youtube-channel-analyzer.azurewebsites.net/)
+- Live Preview: [analyzer.ferilsunu.com](https://analyzer.ferilsunu.com)
 - Portfolio: [ferilsunu.com](https://ferilsunu.com)
 - GitHub Repository: [github.com/ferilsunu/YouTube-Channel-Analyzer](https://github.com/ferilsunu/YouTube-Channel-Analyzer)
 - API Reference: [Google YouTube Data API v3](https://developers.google.com/youtube/v3/docs)
